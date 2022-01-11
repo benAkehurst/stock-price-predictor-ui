@@ -14,7 +14,6 @@
   margin: 2rem auto;
   width: 100%;
   border-radius: 6px;
-  background-color: #03be9f;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
   padding: 1rem;
 }
@@ -35,7 +34,6 @@
   display: block;
   font-weight: bold;
   margin-bottom: 0.5rem;
-  color: white;
   text-align: left;
 }
 

@@ -30,10 +30,6 @@ function MakePrediction(props) {
               name="prediction"
               id="prediction"
               placeholder="eg AAPL"
-              type="text"
-              name="prediction"
-              id="prediction"
-              placeholder="eg AAPL"
               ref={stockInputRef}
             />
           </div>
