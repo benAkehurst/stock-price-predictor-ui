@@ -1,9 +1,11 @@
 import { useContext, useState, Fragment } from "react";
 import classes from "./predictor.module.css";
+
 import NotificationContext from "../../store/notification-context";
 import MakePrediction from "../prediction-items/make-prediction";
 import PredictionResult from "../prediction-items/prediction-result";
 import SecondsCounter from "../ui/seconds-counter";
+import PredictingAnimation from "../ui/predicting-animation";
 
 function Predictor() {
   const notificationCtx = useContext(NotificationContext);
@@ -67,7 +69,12 @@ function Predictor() {
   return (
     <div className={classes.predictionWrapper}>
       <MakePrediction onMakePrediction={makePredictionHandler} />
-      {counting && <SecondsCounter />}
+      {counting && (
+        <Fragment>
+          <PredictingAnimation />
+          <SecondsCounter />
+        </Fragment>
+      )}
       {prediction && <PredictionResult prediction={prediction} />}
     </div>
   );
