@@ -1,7 +1,6 @@
 import classes from "./prediction-result.module.css";
 
 function PredictionResult(props) {
-  console.log(props.prediction);
   return (
     <div className={classes.predictionResult}>
       <div className={classes.banner}>
