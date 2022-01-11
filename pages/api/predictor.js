@@ -3,6 +3,7 @@ import { makeNewPredictionMock } from "../../helpers/api-util";
 
 async function helper(req, res) {
   if (req.method === "POST") {
+    const { stockSymbol } = req.body;
     const data = await makeNewPredictionMock();
     res.status(200).json(data);
   }
