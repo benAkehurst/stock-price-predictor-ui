@@ -20,7 +20,7 @@ function Predictor() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        stockSymbol: stockSymbol,
+        stockSymbol: stockSymbol.enteredStock,
       }),
     })
       .then((response) => {
@@ -32,12 +32,21 @@ function Predictor() {
         });
       })
       .then((data) => {
-        setPrediction(data.predictionResult);
-        notificationCtx.showNotification({
-          title: "Success!",
-          message: "Prediction made successfully!",
-          status: "success",
-        });
+        if (data.predictionResult.message === "Stock not found") {
+          notificationCtx.showNotification({
+            title: "Error",
+            message: "Stock not found",
+            status: "error",
+          });
+          setPrediction(null);
+        } else {
+          setPrediction(data.predictionResult);
+          notificationCtx.showNotification({
+            title: "Success!",
+            message: "Prediction made successfully!",
+            status: "success",
+          });
+        }
       })
       .catch((error) => {
         notificationCtx.showNotification({
