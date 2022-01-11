@@ -2,38 +2,46 @@ import { connectDB, insertDocument } from "../../helpers/db-util";
 import { makeNewPrediction } from "../../helpers/api-util";
 
 async function helper(req, res) {
+  let client;
+  try {
+    client = await connectDB();
+  } catch (err) {
+    res.status(500).json({ message: "Error connecting to database" });
+    return;
+  }
+
   if (req.method === "POST") {
     const { stockSymbol } = req.body;
-    const data = await makeNewPrediction(stockSymbol);
-    if (data) {
-      res.status(200).json({ predictionResult: data });
+    if (!stockSymbol) {
+      res.status(400).json({ message: "Stock symbol is required" });
+      client.close();
+      return;
+    }
+    const newPrediction = await makeNewPrediction(stockSymbol);
+
+    if (newPrediction.message === "Stock not found") {
+      res.status(400).json({ message: "Stock not found" });
+      client.close();
+      return;
+    }
+
+    try {
+      const stockPrediction = {
+        stockSymbol: newPrediction.stockSymbol,
+        predictionData: newPrediction.predictionData,
+        predictionMadeOnDate: newPrediction.predictionMadeOnDate,
+        predictionTimeTaken: newPrediction.predictionTimeTaken,
+        priceTrend: newPrediction.priceTrend,
+      };
+      let result;
+      result = await insertDocument(client, "predictions", stockPrediction);
+      stockPrediction._id = result.insertedId;
+      res.status(201).json({ predictionResult: stockPrediction });
+    } catch (error) {
+      res.status(500).json({ message: "Error inserting document" });
     }
   }
+  client.close();
 }
-
-// async function helper(req, res) {
-//   if (req.method === "POST") {
-//     const userEmail = req.body.email;
-//     if (!userEmail || !userEmail.includes("@")) {
-//       res.status(422).json({ message: "Invalid email" });
-//       return;
-//     }
-//     let client;
-//     try {
-//       client = await connectDB();
-//     } catch (err) {
-//       res.status(500).json({ message: "DB Connection Failed" });
-//       return;
-//     }
-//     try {
-//       await insertDocument(client, "newsletter_emails", { email: userEmail });
-//       client.close();
-//     } catch (err) {
-//       res.status(500).json({ message: "Email insertion failed" });
-//       return;
-//     }
-//     res.status(201).json({ message: "Sign up successful" });
-//   }
-// }
 
 export default helper;
