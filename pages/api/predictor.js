@@ -1,11 +1,13 @@
 import { connectDB, insertDocument } from "../../helpers/db-util";
-import { makeNewPredictionMock } from "../../helpers/api-util";
+import { makeNewPrediction } from "../../helpers/api-util";
 
 async function helper(req, res) {
   if (req.method === "POST") {
     const { stockSymbol } = req.body;
-    const data = await makeNewPredictionMock();
-    res.status(200).json(data);
+    const data = await makeNewPrediction(stockSymbol);
+    if (data) {
+      res.status(200).json({ predictionResult: data });
+    }
   }
 }
 

@@ -32,7 +32,7 @@ function Predictor() {
         });
       })
       .then((data) => {
-        setPrediction(data[0]);
+        setPrediction(data.predictionResult);
         notificationCtx.showNotification({
           title: "Success!",
           message: "Prediction made successfully!",
