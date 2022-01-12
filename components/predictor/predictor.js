@@ -8,7 +8,7 @@ import PredictingProcessing from "../ui/predicting-processing";
 
 function Predictor() {
   const notificationCtx = useContext(NotificationContext);
-  const [prediction, setPrediction] = useState(null);
+  const [predictionData, setPredictionData] = useState(null);
   const [processingPrediction, setProcessingPrediction] = useState(false);
 
   function makePredictionHandler(stockSymbol) {
@@ -46,7 +46,7 @@ function Predictor() {
           setProcessingPrediction(false);
           setPrediction(null);
         } else {
-          setPrediction(data.predictionResult);
+          setPredictionData(data.predictionResult);
           setProcessingPrediction(false);
           notificationCtx.showNotification({
             title: "Success!",
@@ -69,7 +69,7 @@ function Predictor() {
     <div className={classes.predictionWrapper}>
       <MakePrediction onMakePrediction={makePredictionHandler} />
       {processingPrediction && <PredictingProcessing />}
-      {prediction && <PredictionResult prediction={prediction} />}
+      {predictionData && <PredictionResult prediction={predictionData} />}
     </div>
   );
 }
