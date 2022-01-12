@@ -19,6 +19,7 @@ function ShowPrediction() {
 
   return (
     <div className={classes.predictionsWrapper}>
+      <div className={classes.banner}>Prediction Results</div>
       {isLoading && <PredictingProcessing />}
       {predictionData &&
         predictionData.slice(0, 3).map((prediction) => {

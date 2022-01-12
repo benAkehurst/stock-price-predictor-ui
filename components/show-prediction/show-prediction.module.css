@@ -4,4 +4,14 @@
   max-height: 45rem;
   margin: 5rem auto;
   border: 1px solid;
+  overflow: scroll;
+}
+
+.banner {
+  width: 100%;
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 1rem;
+  background-color: #38bdf8;
+  color: white;
 }
