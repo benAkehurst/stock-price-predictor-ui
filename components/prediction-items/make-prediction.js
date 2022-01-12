@@ -18,21 +18,17 @@ function MakePrediction(props) {
 
   return (
     <div className={classes.makePrediction}>
-      <div className={classes.banner}>
-        <h2>Make a prediction</h2>
-      </div>
-      <form className={props.form} onSubmit={makePredictionHandler}>
-        <div className={classes.row}>
-          <div className={classes.control}>
-            <label htmlFor="prediction">Stock Symbol</label>
-            <input
-              type="text"
-              name="prediction"
-              id="prediction"
-              placeholder="eg AAPL"
-              ref={stockInputRef}
-            />
-          </div>
+      <div className={classes.banner}>Make a prediction</div>
+      <form className={classes.form} onSubmit={makePredictionHandler}>
+        <div className={classes.control}>
+          <label htmlFor="prediction">Enter Stock Symbol</label>
+          <input
+            type="text"
+            name="prediction"
+            id="prediction"
+            placeholder="eg AAPL"
+            ref={stockInputRef}
+          />
         </div>
         {isInvalid && <p>Please enter a valid stock symbol!</p>}
         <button>Predict</button>

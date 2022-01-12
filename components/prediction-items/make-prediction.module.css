@@ -2,26 +2,29 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   height: 100%;
   width: 100%;
-  padding: 1rem;
-  border-radius: 0.5rem;
+  border-radius: 1rem;
   background-color: #f5f5f5;
 }
 
-.form {
-  margin: 2rem auto;
+.banner {
+  border: 1px solid black;
   width: 100%;
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 1rem;
+  background-color: #38bdf8;
+  color: white;
+}
+
+.form {
+  width: 80%;
   border-radius: 6px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
   padding: 1rem;
-}
-
-.row {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
+  margin-top: 1rem;
 }
 
 .control {
@@ -35,17 +38,26 @@
   font-weight: bold;
   margin-bottom: 0.5rem;
   text-align: left;
+  font-size: 1.5rem;
 }
 
-.control input,
-.control textarea {
+.control input {
   font: inherit;
   padding: 0.25rem;
-  border-radius: 4px;
+  border-radius: 0.5rem;
   border: 1px solid #ccc;
+  height: 3rem;
+  font-size: 1.5rem;
   width: 100%;
 }
 
 .form button {
-  background-color: white;
+  font-size: 1.25rem;
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+  background-color: #38bdf8;
+  color: white;
+  cursor: pointer;
 }
