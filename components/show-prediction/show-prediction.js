@@ -4,15 +4,12 @@ import PredictionResult from "../prediction-items/prediction-result";
 import PredictingProcessing from "../ui/predicting-processing";
 
 function ShowPrediction() {
-  const [isLoading, setIsLoading] = useState(false);
   const [predictionData, setPredictionData] = useState([]);
 
   useEffect(() => {
-    setIsLoading(true);
     fetch("/api/pastPredictions", { method: "GET" })
       .then((res) => res.json())
       .then((data) => {
-        setIsLoading(false);
         setPredictionData(data.pastPredictions);
       });
   }, []);
@@ -20,7 +17,7 @@ function ShowPrediction() {
   return (
     <div className={classes.predictionsWrapper}>
       <div className={classes.banner}>Prediction Results</div>
-      {isLoading && <PredictingProcessing />}
+
       {predictionData &&
         predictionData.slice(0, 3).map((prediction) => {
           return (

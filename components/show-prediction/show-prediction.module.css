@@ -2,14 +2,21 @@
   width: 90%;
   max-width: 40rem;
   max-height: 45rem;
-  margin: 5rem auto;
-  border: 1px solid;
+  margin: 1rem 1.5rem;
   overflow: scroll;
+}
+
+.predictingProcessing {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
 }
 
 .banner {
   width: 100%;
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: bold;
   padding: 1rem;
   background-color: #38bdf8;

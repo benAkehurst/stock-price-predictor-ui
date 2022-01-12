@@ -8,7 +8,7 @@ function PredictionResult(props) {
   const result = parseISO(props.prediction.predictionMadeOnDate);
   const date = format(result, "dd MMM YYY");
 
-  const currencySymbol = props.prediction.stockSymbol.includes(".lon")
+  const currencySymbol = props.prediction.stockSymbol.includes(".l")
     ? "£"
     : "$";
 
@@ -23,14 +23,18 @@ function PredictionResult(props) {
             <h3>Open Price</h3>
             <p>
               {currencySymbol}
-              {props.prediction.predictionData.open.toFixed(2)}
+              {currencySymbol === "£"
+                ? props.prediction.predictionData.open.toFixed(2) / 100
+                : props.prediction.predictionData.open.toFixed(2)}
             </p>
           </div>
           <div className={classes.predictionResultItem}>
             <h3>Close Price</h3>
             <p>
               {currencySymbol}
-              {props.prediction.predictionData.close.toFixed(2)}
+              {currencySymbol === "£"
+                ? props.prediction.predictionData.close.toFixed(2) / 100
+                : props.prediction.predictionData.close.toFixed(2)}
             </p>
           </div>
         </div>
@@ -39,14 +43,18 @@ function PredictionResult(props) {
             <h3>High Price</h3>
             <p>
               {currencySymbol}
-              {props.prediction.predictionData.high.toFixed(2)}
+              {currencySymbol === "£"
+                ? props.prediction.predictionData.high.toFixed(2) / 100
+                : props.prediction.predictionData.high.toFixed(2)}
             </p>
           </div>
           <div className={classes.predictionResultItem}>
             <h3>Low Price</h3>
             <p>
               {currencySymbol}
-              {props.prediction.predictionData.low.toFixed(2)}
+              {currencySymbol === "£"
+                ? props.prediction.predictionData.low.toFixed(2) / 100
+                : props.prediction.predictionData.low.toFixed(2)}
             </p>
           </div>
         </div>

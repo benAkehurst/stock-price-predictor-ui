@@ -68,8 +68,16 @@ function Predictor() {
   return (
     <div className={classes.predictionWrapper}>
       <MakePrediction onMakePrediction={makePredictionHandler} />
-      {processingPrediction && <PredictingProcessing />}
-      {predictionData && <PredictionResult prediction={predictionData} />}
+      {processingPrediction && (
+        <div className={classes.predictingProcessing}>
+          <PredictingProcessing />
+        </div>
+      )}
+      {predictionData && (
+        <div className={classes.predictionResult}>
+          <PredictionResult prediction={predictionData} />
+        </div>
+      )}
     </div>
   );
 }
