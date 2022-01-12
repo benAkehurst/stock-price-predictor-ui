@@ -1,7 +1,7 @@
 import { connectDB, insertDocument } from "../../helpers/db-util";
 import { makeNewPrediction } from "../../helpers/api-util";
 
-async function helper(req, res) {
+export default async function helper(req, res) {
   let client;
   try {
     client = await connectDB();
@@ -43,5 +43,3 @@ async function helper(req, res) {
   }
   client.close();
 }
-
-export default helper;
