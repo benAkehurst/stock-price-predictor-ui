@@ -1,6 +1,6 @@
-import { Fragment } from "react";
-import classes from "./predicting-processing.module.css";
-import SecondsCounter from "./seconds-counter";
+import { Fragment } from 'react';
+import classes from './predicting-processing.module.css';
+import SecondsCounter from './seconds-counter';
 
 function PredictingProcessing() {
   return (
@@ -16,7 +16,7 @@ function PredictingProcessing() {
         <div></div>
         <div></div>
       </div>
-      <SecondsCounter />
+      {/* <SecondsCounter /> */}
     </Fragment>
   );
 }
