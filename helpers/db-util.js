@@ -1,7 +1,6 @@
-import { MongoClient } from 'mongodb';
+import { MongoClient } from "mongodb";
 
 export async function connectDB() {
-  console.log(process.env.DB_URL);
   const client = await MongoClient.connect(process.env.DB_URL);
   return client;
 }
@@ -12,12 +11,8 @@ export async function insertDocument(client, collectionName, document) {
   return result;
 }
 
-export async function getAllDocuments(client, collection, eventId, sort) {
+export async function getAllPredictions(client, collection, sort) {
   const db = client.db();
-  const documents = await db
-    .collection(collection)
-    .find(eventId ? { eventId: eventId } : {})
-    .sort(sort)
-    .toArray();
+  const documents = await db.collection(collection).find().sort(sort).toArray();
   return documents;
 }
