@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 function SecondsCounter() {
   const [counter, setCounter] = useState(0);
@@ -14,6 +14,10 @@ function SecondsCounter() {
   useEffect(() => {
     makeCounter();
   }, []);
+
+  useEffect(() => {
+    clearInterval(interval);
+  }, [counter]);
 
   return (
     <div className="seconds-counter">
