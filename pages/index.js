@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Predictor from "../components/predictor/Predictor";
+import ShowPrediction from "../components/show-prediction/show-prediction";
 
 function HomePage() {
   return (
@@ -11,7 +12,10 @@ function HomePage() {
           content="An app that uses ML to calculate stock prices for the coming day"
         />
       </Head>
-      <Predictor />
+      <div className="main-items-wrapper">
+        <Predictor />
+        <ShowPrediction />
+      </div>
     </div>
   );
 }
