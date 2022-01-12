@@ -1,0 +1,7 @@
+.predictionsWrapper {
+  width: 90%;
+  max-width: 40rem;
+  max-height: 45rem;
+  margin: 5rem auto;
+  border: 1px solid;
+}
