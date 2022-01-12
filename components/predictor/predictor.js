@@ -1,16 +1,15 @@
-import { useContext, useState, Fragment } from "react";
+import { useContext, useState } from "react";
 import classes from "./predictor.module.css";
 
 import NotificationContext from "../../store/notification-context";
 import MakePrediction from "../prediction-items/make-prediction";
 import PredictionResult from "../prediction-items/prediction-result";
-import SecondsCounter from "../ui/seconds-counter";
-import PredictingAnimation from "../ui/predicting-animation";
+import PredictingProcessing from "../ui/predicting-processing";
 
 function Predictor() {
   const notificationCtx = useContext(NotificationContext);
   const [prediction, setPrediction] = useState(null);
-  const [counting, setCounting] = useState(false);
+  const [processingPrediction, setProcessingPrediction] = useState(false);
 
   function makePredictionHandler(stockSymbol) {
     notificationCtx.showNotification({
@@ -18,7 +17,7 @@ function Predictor() {
       message: "Making prediction...",
       status: "pending...",
     });
-    setCounting(true);
+    setProcessingPrediction(true);
     fetch("/api/predictor", {
       method: "POST",
       headers: {
@@ -33,7 +32,7 @@ function Predictor() {
           return response.json();
         }
         return response.json().then((error) => {
-          setCounting(false);
+          setProcessingPrediction(false);
           throw new Error(error.message || "Something went wrong");
         });
       })
@@ -44,11 +43,11 @@ function Predictor() {
             message: "Stock not found",
             status: "error",
           });
-          setCounting(false);
+          setProcessingPrediction(false);
           setPrediction(null);
         } else {
           setPrediction(data.predictionResult);
-          setCounting(false);
+          setProcessingPrediction(false);
           notificationCtx.showNotification({
             title: "Success!",
             message: "Prediction made successfully!",
@@ -57,7 +56,7 @@ function Predictor() {
         }
       })
       .catch((error) => {
-        setCounting(false);
+        setProcessingPrediction(false);
         notificationCtx.showNotification({
           title: "Error!",
           message: error.message || "Something went wrong!",
@@ -69,12 +68,7 @@ function Predictor() {
   return (
     <div className={classes.predictionWrapper}>
       <MakePrediction onMakePrediction={makePredictionHandler} />
-      {counting && (
-        <Fragment>
-          <PredictingAnimation />
-          <SecondsCounter />
-        </Fragment>
-      )}
+      {processingPrediction && <PredictingProcessing />}
       {prediction && <PredictionResult prediction={prediction} />}
     </div>
   );
