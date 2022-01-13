@@ -1,27 +1,27 @@
-import { connectDB, insertDocument } from '../../helpers/db-util';
-import { makeNewPrediction } from '../../helpers/api-util';
+import { connectDB, insertDocument } from "../../helpers/db-util";
+import { makeNewPrediction } from "../../helpers/api-util";
 
-export default async function helper(req, res) {
+export default async function handler(req, res) {
   let client;
   try {
     client = await connectDB();
   } catch (err) {
-    console.log('err: ', err);
-    res.status(500).json({ message: 'Error connecting to database' });
+    console.log("err: ", err);
+    res.status(500).json({ message: "Error connecting to database" });
     return;
   }
 
-  if (req.method === 'POST') {
+  if (req.method === "POST") {
     const { stockSymbol } = req.body;
     if (!stockSymbol) {
-      res.status(400).json({ message: 'Stock symbol is required' });
+      res.status(400).json({ message: "Stock symbol is required" });
       client.close();
       return;
     }
     const newPrediction = await makeNewPrediction(stockSymbol);
 
-    if (newPrediction.message === 'Stock not found') {
-      res.status(400).json({ message: 'Stock not found' });
+    if (newPrediction.message === "Stock not found") {
+      res.status(400).json({ message: "Stock not found" });
       client.close();
       return;
     }
@@ -35,11 +35,11 @@ export default async function helper(req, res) {
         priceTrend: newPrediction.priceTrend,
       };
       let result;
-      result = await insertDocument(client, 'predictions', stockPrediction);
+      result = await insertDocument(client, "predictions", stockPrediction);
       stockPrediction._id = result.insertedId;
       res.status(201).json({ predictionResult: stockPrediction });
     } catch (error) {
-      res.status(500).json({ message: 'Error inserting document' });
+      res.status(500).json({ message: "Error inserting document" });
     }
   }
   client.close();
