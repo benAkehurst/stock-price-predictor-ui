@@ -1,4 +1,4 @@
-import { MongoClient } from "mongodb";
+import { MongoClient, ObjectId } from "mongodb";
 
 export async function connectDB() {
   const client = await MongoClient.connect(process.env.DB_URL);
@@ -15,4 +15,13 @@ export async function getAllPredictions(client, collection, sort) {
   const db = client.db();
   const documents = await db.collection(collection).find().sort(sort).toArray();
   return documents;
+}
+
+export async function getSinglePrediction(client, collection, predictionId) {
+  const db = client.db();
+  const documents = await db.collection(collection).find().toArray();
+  const singlePrediction = documents.filter((prediction) => {
+    return ObjectId(prediction._id).toString() === predictionId;
+  });
+  return singlePrediction;
 }
