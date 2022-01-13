@@ -1,10 +1,15 @@
+import { useState } from "react";
 import { parseISO, format } from "date-fns";
 import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Modal from "../ui/modal";
+import Comparison from "./comparison";
 
 import classes from "./prediction-result.module.css";
 
 function PredictionResult(props) {
+  const [showModal, setShowModal] = useState(false);
+  const [actualOutcome, setActualOutcome] = useState(null);
   const result = parseISO(props.prediction.predictionMadeOnDate);
   const date = format(result, "dd MMM YYY");
   const currencySymbol = props.prediction.stockSymbol.includes(".l")
@@ -23,10 +28,8 @@ function PredictionResult(props) {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(
-          "🚀 ~ file: prediction-result.js ~ line 25 ~ .then ~ data",
-          data
-        );
+        setActualOutcome(data.singlePrediction);
+        setShowModal(true);
       });
   }
 
@@ -103,6 +106,11 @@ function PredictionResult(props) {
         </div>
       </div>
       <button onClick={checkAccuracyHandler}>Check Prediction Accuracy</button>
+      {showModal ? (
+        <Modal onClose={() => setShowModal(false)} show={showModal}>
+          <Comparison outcomeData={actualOutcome} />
+        </Modal>
+      ) : null}
     </div>
   );
 }
