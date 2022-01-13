@@ -1,4 +1,5 @@
 import { getDummyPrediction } from "../dummy-data";
+import { dataCleaner } from "../lib/alphaVantage-data-cleaner";
 
 export async function makeNewPrediction(props) {
   const URL = `http://localhost:8080/api/v1/predict/${props}`;
@@ -12,6 +13,19 @@ export async function makeNewPrediction(props) {
       } else {
         return data;
       }
+    });
+  return response;
+}
+
+export async function getActualPricing(props) {
+  const URL = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${props}&apikey=${process.env.ALPHA_VANTAGE_KEY}`;
+  const response = await fetch(URL, {
+    method: "GET",
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      const dataConverted = dataCleaner(data);
+      return dataConverted;
     });
   return response;
 }
