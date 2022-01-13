@@ -7,10 +7,28 @@ import classes from "./prediction-result.module.css";
 function PredictionResult(props) {
   const result = parseISO(props.prediction.predictionMadeOnDate);
   const date = format(result, "dd MMM YYY");
-
   const currencySymbol = props.prediction.stockSymbol.includes(".l")
     ? "£"
     : "$";
+
+  function checkAccuracyHandler() {
+    const reqBody = {
+      predictionId: props.prediction._id,
+      stockSymbol: props.prediction.stockSymbol,
+      date: props.prediction.predictionMadeOnDate,
+    };
+    fetch("/api/checkPrediction", {
+      method: "POST",
+      body: JSON.stringify(reqBody),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(
+          "🚀 ~ file: prediction-result.js ~ line 25 ~ .then ~ data",
+          data
+        );
+      });
+  }
 
   return (
     <div className={classes.predictionResultWrapper}>
@@ -84,6 +102,7 @@ function PredictionResult(props) {
           <p>{props.prediction.predictionTimeTaken.toFixed(2)} seconds</p>
         </div>
       </div>
+      <button onClick={checkAccuracyHandler}>Check Prediction Accuracy</button>
     </div>
   );
 }
