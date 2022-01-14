@@ -12,6 +12,7 @@ function PredictionResult(props) {
   const [actualOutcome, setActualOutcome] = useState(null);
   const result = parseISO(props.prediction.predictionMadeOnDate);
   const date = format(result, "dd MMM YYY");
+  const isToday = format(new Date(), "dd MMM YYY");
   const currencySymbol = props.prediction.stockSymbol.includes(".l")
     ? "£"
     : "$";
@@ -105,7 +106,11 @@ function PredictionResult(props) {
           <p>{props.prediction.predictionTimeTaken.toFixed(2)} seconds</p>
         </div>
       </div>
-      <button onClick={checkAccuracyHandler}>Check Prediction Accuracy</button>
+      {isToday === date ? null : (
+        <button className={classes.button} onClick={checkAccuracyHandler}>
+          Check Prediction Accuracy
+        </button>
+      )}
       {showModal ? (
         <Modal onClose={() => setShowModal(false)} show={showModal}>
           <Comparison outcomeData={actualOutcome} />

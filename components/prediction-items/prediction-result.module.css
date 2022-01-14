@@ -37,3 +37,15 @@
 .red {
   color: red;
 }
+
+.button {
+  font-size: 1.25rem;
+  width: 50%;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+  background-color: #38bdf8;
+  color: white;
+  cursor: pointer;
+}
