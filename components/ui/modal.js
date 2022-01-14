@@ -28,7 +28,9 @@ const Modal = ({ show, onClose, children, title }) => {
       <StyledModalWrapper ref={modalWrapperRef}>
         <StyledModal>
           <StyledModalHeader>
-            <button onClick={handleCloseClick}>x</button>
+            <StyledModalCloseButton onClick={handleCloseClick}>
+              Close
+            </StyledModalCloseButton>
           </StyledModalHeader>
           {title && <StyledModalTitle>{title}</StyledModalTitle>}
           <StyledModalBody>{children}</StyledModalBody>
@@ -53,8 +55,7 @@ const StyledModalBody = styled.div`
 
 const StyledModalHeader = styled.div`
   display: flex;
-  justify-content: flex-end;
-  font-size: 25px;
+  justify-content: flex-start;
 `;
 
 const StyledModalWrapper = styled.div`
@@ -80,6 +81,16 @@ const StyledModalOverlay = styled.div`
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.5);
+`;
+
+const StyledModalCloseButton = styled.button`
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+  background-color: #38bdf8;
+  color: white;
+  cursor: pointer;
 `;
 
 export default Modal;
