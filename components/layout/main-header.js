@@ -12,14 +12,12 @@ function MainHeader() {
       <nav className={classes.navigation}>
         {session ? (
           <div>
-            Welcome user
-            <br />
+            <Link href="/myaccount">My Account</Link>
             <button onClick={() => signOut()}>Sign out</button>
           </div>
         ) : (
           <div>
-            Click to sign into your user account <br />
-            <button onClick={() => signIn()}>Sign in</button>
+            Sign In - <button onClick={() => signIn()}>Sign in</button>
           </div>
         )}
       </nav>
