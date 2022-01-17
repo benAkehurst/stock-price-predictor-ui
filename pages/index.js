@@ -1,7 +1,7 @@
-import Head from "next/head";
-import { useSession, signIn, signOut } from "next-auth/react";
-import Predictor from "../components/predictor/Predictor";
-import ShowPrediction from "../components/show-prediction/show-prediction";
+import Head from 'next/head';
+import { useSession, signIn, signOut } from 'next-auth/react';
+import Predictor from '../components/predictor/Predictor';
+import ShowPrediction from '../components/show-prediction/show-prediction';
 
 function HomePage() {
   const { data: session } = useSession();
