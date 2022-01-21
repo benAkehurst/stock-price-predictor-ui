@@ -1,8 +1,11 @@
 import Head from "next/head";
+import { useSession, signIn, signOut } from "next-auth/react";
 import Predictor from "../components/predictor/Predictor";
 import ShowPrediction from "../components/show-prediction/show-prediction";
+import LandingPage from "../components/ui/landing-page";
 
 function HomePage() {
+  const { data: session } = useSession();
   return (
     <div>
       <Head>
@@ -12,10 +15,16 @@ function HomePage() {
           content="An app that uses ML to calculate stock prices for the coming day"
         />
       </Head>
-      <div className="main-items-wrapper">
-        <Predictor />
-        <ShowPrediction />
-      </div>
+      {session ? (
+        <div className="main-items-wrapper">
+          <Predictor />
+          <ShowPrediction />
+        </div>
+      ) : (
+        <div className="main-items-wrapper">
+          <LandingPage />
+        </div>
+      )}
     </div>
   );
 }
