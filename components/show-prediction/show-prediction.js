@@ -22,8 +22,7 @@ function ShowPrediction({ userId }) {
 
   return (
     <div className={classes.predictionsWrapper}>
-      <div className={classes.banner}>Prediction Results</div>
-
+      <div className={classes.banner}>Last 3 Predictions</div>
       {predictionData &&
         predictionData.slice(0, 3).map((prediction) => {
           return (

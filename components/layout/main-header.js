@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { useSession, signIn, signOut } from "next-auth/react";
 import classes from "./main-header.module.css";
-import { Fragment } from "react";
 
 function MainHeader() {
   const { data: session } = useSession();
@@ -13,14 +12,9 @@ function MainHeader() {
       <div className={classes.navLinks}>
         <nav className={classes.navigation}>
           {session ? (
-            <Fragment>
-              <button className={classes.button}>
-                <Link href="/myaccount">My Account</Link>
-              </button>
-              <button className={classes.button}>
-                <Link href="/predictions">My Predictions</Link>
-              </button>
-            </Fragment>
+            <button className={classes.button}>
+              <Link href="/predictions">My Predictions</Link>
+            </button>
           ) : null}
         </nav>
         {session ? (
