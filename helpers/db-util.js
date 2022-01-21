@@ -11,9 +11,13 @@ export async function insertDocument(client, collectionName, document) {
   return result;
 }
 
-export async function getAllPredictions(client, collection, sort) {
+export async function getAllPredictions(client, collection, userId, sort) {
   const db = client.db();
-  const documents = await db.collection(collection).find().sort(sort).toArray();
+  const documents = await db
+    .collection(collection)
+    .find({ userId: userId })
+    .sort(sort)
+    .toArray();
   return documents;
 }
 

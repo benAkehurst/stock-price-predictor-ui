@@ -10,10 +10,16 @@ export default async function handler(req, res) {
     return;
   }
 
-  if (req.method === "GET") {
-    const pastPredictions = await getAllPredictions(client, "predictions", {
-      _id: -1,
-    });
+  if (req.method === "POST") {
+    const { userId } = req.body;
+    const pastPredictions = await getAllPredictions(
+      client,
+      "predictions",
+      userId,
+      {
+        _id: -1,
+      }
+    );
     try {
       res.status(200).json({ pastPredictions: pastPredictions });
     } catch (error) {
