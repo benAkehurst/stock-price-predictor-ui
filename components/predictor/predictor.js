@@ -1,12 +1,11 @@
 import { useContext, useState } from "react";
 import classes from "./predictor.module.css";
-
 import NotificationContext from "../../store/notification-context";
 import MakePrediction from "../prediction-items/make-prediction";
 import PredictionResult from "../prediction-items/prediction-result";
 import PredictingProcessing from "../ui/predicting-processing";
 
-function Predictor() {
+function Predictor({ userId }) {
   const notificationCtx = useContext(NotificationContext);
   const [predictionData, setPredictionData] = useState(null);
   const [processingPrediction, setProcessingPrediction] = useState(false);
@@ -25,6 +24,7 @@ function Predictor() {
       },
       body: JSON.stringify({
         stockSymbol: stockSymbol.enteredStock,
+        userId: userId,
       }),
     })
       .then((response) => {

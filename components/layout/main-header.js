@@ -13,7 +13,7 @@ function MainHeader() {
         <nav className={classes.navigation}>
           {session ? (
             <button className={classes.button}>
-              <Link href="/myaccount">My Account</Link>
+              <Link href="/predictions">My Predictions</Link>
             </button>
           ) : null}
         </nav>

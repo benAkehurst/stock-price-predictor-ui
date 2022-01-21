@@ -10,12 +10,23 @@ export default async function handler(req, res) {
     return;
   }
 
-  if (req.method === "GET") {
-    const pastPredictions = await getAllPredictions(client, "predictions", {
-      _id: -1,
-    });
+  if (req.method === "POST") {
+    const referrerPredictions = req.headers.referer.includes("predictions");
+    const { userId } = req.body;
+    const pastPredictions = await getAllPredictions(
+      client,
+      "predictions",
+      userId,
+      {
+        _id: -1,
+      }
+    );
     try {
-      res.status(200).json({ pastPredictions: pastPredictions });
+      referrerPredictions
+        ? res.status(200).json({ pastPredictions: pastPredictions })
+        : res
+            .status(200)
+            .json({ pastPredictions: pastPredictions.slice(0, 3) });
     } catch (error) {
       res.status(500).json({ message: "Error inserting document" });
     }

@@ -12,7 +12,7 @@ export default async function handler(req, res) {
   }
 
   if (req.method === "POST") {
-    const { stockSymbol } = req.body;
+    const { stockSymbol, userId } = req.body;
     if (!stockSymbol) {
       res.status(400).json({ message: "Stock symbol is required" });
       client.close();
@@ -33,6 +33,7 @@ export default async function handler(req, res) {
         predictionMadeOnDate: newPrediction.predictionMadeOnDate,
         predictionTimeTaken: newPrediction.predictionTimeTaken,
         priceTrend: newPrediction.priceTrend,
+        userId: userId,
       };
       let result;
       result = await insertDocument(client, "predictions", stockPrediction);
