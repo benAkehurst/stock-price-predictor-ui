@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { getSession } from "next-auth/react";
+import styled from "styled-components";
 import PredictionResult from "../components/prediction-items/prediction-result";
+import { Fragment } from "react/cjs/react.production.min";
 
 function Predictions(props) {
   const [predictionData, setPredictionData] = useState([]);
@@ -19,16 +21,41 @@ function Predictions(props) {
   }, []);
 
   return (
-    <div className="main-items-wrapper">
-      <h2>Predictions page</h2>
-      {predictionData.map((prediction) => {
-        return (
-          <PredictionResult key={prediction._id} prediction={prediction} />
-        );
-      })}
-    </div>
+    <Fragment>
+      <StyledContainer>
+        <h2>Predictions page</h2>
+        <StyledSinglePredictionContainer>
+          {predictionData.map((prediction) => {
+            return (
+              <StyledSinglePrediction key={prediction._id}>
+                <PredictionResult prediction={prediction} />
+              </StyledSinglePrediction>
+            );
+          })}
+        </StyledSinglePredictionContainer>
+      </StyledContainer>
+    </Fragment>
   );
 }
+
+const StyledContainer = styled.div`
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const StyledSinglePredictionContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 1rem;
+`;
+
+const StyledSinglePrediction = styled.div`
+  margin: 1rem;
+`;
 
 export async function getServerSideProps(context) {
   const session = await getSession(context);
