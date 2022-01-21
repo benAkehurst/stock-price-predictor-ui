@@ -25,7 +25,7 @@ function MainHeader() {
           </div>
         ) : (
           <div>
-            <button className={classes.button} onClick={() => signIn()}>
+            <button className={classes.button} onClick={() => signIn("google")}>
               Sign in
             </button>
           </div>
