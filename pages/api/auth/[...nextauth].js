@@ -27,6 +27,10 @@ export default NextAuth({
       }
       return Promise.resolve("/");
     },
+    async session({ session, token, user }) {
+      session.user._id = user.id;
+      return session;
+    },
   },
   adapter: MongoDBAdapter(clientPromise),
 });

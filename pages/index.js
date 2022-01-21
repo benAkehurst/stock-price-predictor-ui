@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import Predictor from "../components/predictor/Predictor";
 import ShowPrediction from "../components/show-prediction/show-prediction";
 import LandingPage from "../components/ui/landing-page";
