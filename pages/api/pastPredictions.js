@@ -21,7 +21,7 @@ export default async function handler(req, res) {
       }
     );
     try {
-      res.status(200).json({ pastPredictions: pastPredictions });
+      res.status(200).json({ pastPredictions: pastPredictions.slice(0, 3) });
     } catch (error) {
       res.status(500).json({ message: "Error inserting document" });
     }
