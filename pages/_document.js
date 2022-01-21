@@ -6,7 +6,6 @@ class MyDocument extends Document {
       <Html lang="en">
         <Head />
         <body>
-          <div id="overlays" />
           <Main />
           <NextScript />
           <div id="modal-root"></div>
