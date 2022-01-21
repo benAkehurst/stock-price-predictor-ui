@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import classes from "./main-header.module.css";
+import GoogleLoginButton from "../ui/google-signIn";
 
 function MainHeader() {
   const { data: session } = useSession();
@@ -24,11 +25,7 @@ function MainHeader() {
             </button>
           </div>
         ) : (
-          <div>
-            <button className={classes.button} onClick={() => signIn("google")}>
-              Sign in
-            </button>
-          </div>
+          <GoogleLoginButton />
         )}
       </div>
     </header>
