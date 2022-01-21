@@ -70,6 +70,10 @@ function Predictor({ userId }) {
       <MakePrediction onMakePrediction={makePredictionHandler} />
       {processingPrediction && (
         <div className={classes.predictingProcessing}>
+          <p>
+            Processing your request now. This can take around 50 seconds, but it
+            may also take longer... so please be patient.
+          </p>
           <PredictingProcessing />
         </div>
       )}

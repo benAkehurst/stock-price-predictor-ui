@@ -3,4 +3,15 @@
   max-width: 40rem;
   max-height: 45rem;
   margin: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+.predictingProcessing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
