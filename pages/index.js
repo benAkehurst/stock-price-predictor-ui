@@ -17,8 +17,8 @@ function HomePage() {
       </Head>
       {session ? (
         <div className="main-items-wrapper">
-          <Predictor />
-          <ShowPrediction />
+          <Predictor userId={session.user._id} />
+          <ShowPrediction userId={session.user._id} />
         </div>
       ) : (
         <div className="main-items-wrapper">
