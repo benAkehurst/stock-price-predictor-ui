@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { SessionProvider } from "next-auth/react";
-import Layout from "../components/layout/layout";
+import Layout from "../components/Layout/Layout";
 import { NotificationContextProvider } from "../store/notification-context";
 import "../styles/globals.css";
 

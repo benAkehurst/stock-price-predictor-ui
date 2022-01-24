@@ -1,3 +1,8 @@
+.predictingWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
 .ldsGrid {
   background-color: lightgrey;
   display: inline-block;

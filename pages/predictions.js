@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getSession } from "next-auth/react";
 import styled from "styled-components";
-import PredictionResult from "../components/prediction-items/prediction-result";
+import PredictionResult from "../components/PredictionItems/PredictionResult";
 import { Fragment } from "react/cjs/react.production.min";
 
 function Predictions(props) {

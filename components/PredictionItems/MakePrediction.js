@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
-import classes from "./make-prediction.module.css";
+import classes from "./MakePrediction.module.css";
+import Button from "../UI/Button";
 
 function MakePrediction(props) {
   const [isInvalid, setIsInvalid] = useState(false);
@@ -31,7 +32,7 @@ function MakePrediction(props) {
           />
         </div>
         {isInvalid && <p>Please enter a valid stock symbol!</p>}
-        <button>Predict</button>
+        <Button>Predict</Button>
       </form>
     </div>
   );

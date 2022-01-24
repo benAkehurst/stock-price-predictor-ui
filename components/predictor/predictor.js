@@ -1,9 +1,9 @@
 import { useContext, useState } from "react";
-import classes from "./predictor.module.css";
+import classes from "./Predictor.module.css";
 import NotificationContext from "../../store/notification-context";
-import MakePrediction from "../prediction-items/make-prediction";
-import PredictionResult from "../prediction-items/prediction-result";
-import PredictingProcessing from "../ui/predicting-processing";
+import MakePrediction from "../PredictionItems/MakePrediction";
+import PredictionResult from "../PredictionItems/PredictionResult";
+import PredictingProcessing from "../UI/PredictingProcessing";
 
 function Predictor({ userId }) {
   const notificationCtx = useContext(NotificationContext);

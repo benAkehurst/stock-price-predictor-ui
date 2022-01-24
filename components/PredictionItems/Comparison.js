@@ -1,7 +1,7 @@
 import { parseISO, format } from "date-fns";
 import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import classes from "./comparison.module.css";
+import classes from "./Comparison.module.css";
 
 export default function Comparison(props) {
   const { outcomeData } = props;

@@ -1,10 +1,9 @@
-import { Fragment } from "react";
-import classes from "./predicting-processing.module.css";
-import SecondsCounter from "./seconds-counter";
+import classes from "./PredictingProcessing.module.css";
+import SecondsCounter from "./SecondsCounter";
 
 function PredictingProcessing() {
   return (
-    <Fragment>
+    <div className={classes.predictingWrapper}>
       <div className={classes.ldsGrid}>
         <div></div>
         <div></div>
@@ -16,8 +15,8 @@ function PredictingProcessing() {
         <div></div>
         <div></div>
       </div>
-      {/* <SecondsCounter /> */}
-    </Fragment>
+      <SecondsCounter />
+    </div>
   );
 }
 

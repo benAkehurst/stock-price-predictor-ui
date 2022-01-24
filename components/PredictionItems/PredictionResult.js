@@ -2,10 +2,11 @@ import { useState } from "react";
 import { parseISO, format } from "date-fns";
 import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Modal from "../ui/modal";
-import Comparison from "./comparison";
+import Modal from "../UI/Modal";
+import Button from "../UI/Button";
+import Comparison from "./Comparison";
 
-import classes from "./prediction-result.module.css";
+import classes from "./PredictionResult.module.css";
 
 function PredictionResult(props) {
   const [showModal, setShowModal] = useState(false);
@@ -107,9 +108,9 @@ function PredictionResult(props) {
         </div>
       </div>
       {isToday === date ? null : (
-        <button className={classes.button} onClick={checkAccuracyHandler}>
+        <Button className={classes.button} onClick={checkAccuracyHandler}>
           Check Prediction Accuracy
-        </button>
+        </Button>
       )}
       {showModal ? (
         <Modal onClose={() => setShowModal(false)} show={showModal}>
