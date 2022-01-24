@@ -3,7 +3,7 @@ import classes from "./predictor.module.css";
 import NotificationContext from "../../store/notification-context";
 import MakePrediction from "../prediction-items/make-prediction";
 import PredictionResult from "../prediction-items/prediction-result";
-import PredictingProcessing from "../ui/predicting-processing";
+import PredictingProcessing from "../ui/PredictingProcessing";
 
 function Predictor({ userId }) {
   const notificationCtx = useContext(NotificationContext);

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import classes from "./show-prediction.module.css";
 import PredictionResult from "../prediction-items/prediction-result";
-import PredictingProcessing from "../ui/predicting-processing";
+import PredictingProcessing from "../ui/PredictingProcessing";
 
 function ShowPrediction({ userId }) {
   const [predictionData, setPredictionData] = useState([]);
