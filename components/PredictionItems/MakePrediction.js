@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import classes from "./make-prediction.module.css";
+import classes from "./MakePrediction.module.css";
 
 function MakePrediction(props) {
   const [isInvalid, setIsInvalid] = useState(false);

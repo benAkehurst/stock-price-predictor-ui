@@ -1,8 +1,8 @@
 import Head from "next/head";
 import { useSession } from "next-auth/react";
-import Predictor from "../components/predictor/Predictor";
-import ShowPrediction from "../components/show-prediction/show-prediction";
-import LandingPage from "../components/ui/LandingPage";
+import Predictor from "../components/Predictor/Predictor";
+import ShowPrediction from "../components/ShowPrediction/ShowPrediction";
+import LandingPage from "../components/UI/LandingPage";
 
 function HomePage() {
   const { data: session } = useSession();

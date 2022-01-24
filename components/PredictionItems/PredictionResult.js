@@ -2,10 +2,10 @@ import { useState } from "react";
 import { parseISO, format } from "date-fns";
 import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Modal from "../ui/Modal";
-import Comparison from "./comparison";
+import Modal from "../UI/Modal";
+import Comparison from "./Comparison";
 
-import classes from "./prediction-result.module.css";
+import classes from "./PredictionResult.module.css";
 
 function PredictionResult(props) {
   const [showModal, setShowModal] = useState(false);

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
-import classes from "./main-header.module.css";
-import GoogleLoginButton from "../ui/GoogleLoginButton";
+import classes from "./MainHeader.module.css";
+import GoogleLoginButton from "../UI/GoogleLoginButton";
 
 function MainHeader() {
   const { data: session } = useSession();
