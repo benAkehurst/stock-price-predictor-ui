@@ -1,15 +1,4 @@
-import { signIn } from "next-auth/react";
-import styled from "styled-components";
-
-export default function GoogleLoginButton() {
-  return (
-    <StyledGoogleLoginButton onClick={() => signIn("google")}>
-      Sign in with Google
-    </StyledGoogleLoginButton>
-  );
-}
-
-const StyledGoogleLoginButton = styled.button`
+.googleLoginButton {
   transition: background-color 0.3s, box-shadow 0.3s;
   cursor: pointer;
   padding: 12px 16px 12px 42px;
@@ -25,21 +14,22 @@ const StyledGoogleLoginButton = styled.button`
   background-color: white;
   background-repeat: no-repeat;
   background-position: 12px 11px;
-  &:hover {
-    box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.25);
-  }
-  &:active {
-    background-color: #eeeeee;
-  }
-  &:focus {
-    outline: none;
-    box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.25),
-      0 0 0 3px #c8dafc;
-  }
-  &:disabled {
-    filter: grayscale(100%);
-    background-color: #ebebeb;
-    box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 1px 1px rgba(0, 0, 0, 0.25);
-    cursor: not-allowed;
-  }
-`;
+}
+
+.googleLoginButton:hover {
+  box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.25);
+}
+.googleLoginButton:active {
+  background-color: #eeeeee;
+}
+.googleLoginButton:focus {
+  outline: none;
+  box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.25),
+    0 0 0 3px #c8dafc;
+}
+.googleLoginButton:disabled {
+  filter: grayscale(100%);
+  background-color: #ebebeb;
+  box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 1px 1px rgba(0, 0, 0, 0.25);
+  cursor: not-allowed;
+}

@@ -1,5 +1,3 @@
-import GoogleLoginButton from "../../components/ui/google-signIn";
-
 export default function LandingPage() {
   return (
     <div>
@@ -11,9 +9,6 @@ export default function LandingPage() {
       <p>
         To get started, please click the button above to sign in using your
         Google Account.
-      </p>
-      <p>
-        Or <GoogleLoginButton />
       </p>
     </div>
   );
