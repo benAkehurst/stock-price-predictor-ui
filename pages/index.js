@@ -5,7 +5,7 @@ import ShowPrediction from "../components/ShowPrediction/ShowPrediction";
 import LandingPage from "../components/UI/LandingPage";
 
 function HomePage() {
-  const { data: session } = useSession();
+  const { data: session, loading } = useSession();
   return (
     <div>
       <Head>

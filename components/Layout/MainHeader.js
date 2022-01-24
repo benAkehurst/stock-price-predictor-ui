@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 import classes from "./MainHeader.module.css";
 import GoogleLoginButton from "../UI/GoogleLoginButton";
+import Button from "../UI/Button";
 
 function MainHeader() {
   const { data: session } = useSession();
@@ -13,16 +14,16 @@ function MainHeader() {
       <div className={classes.navLinks}>
         <nav className={classes.navigation}>
           {session ? (
-            <button className={classes.button}>
+            <Button className={classes.button}>
               <Link href="/predictions">My Predictions</Link>
-            </button>
+            </Button>
           ) : null}
         </nav>
         {session ? (
           <div>
-            <button className={classes.button} onClick={() => signOut()}>
+            <Button className={classes.button} onClick={() => signOut()}>
               Sign out
-            </button>
+            </Button>
           </div>
         ) : (
           <GoogleLoginButton />
