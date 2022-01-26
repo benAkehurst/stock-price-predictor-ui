@@ -5,7 +5,7 @@ import ShowPrediction from "../components/ShowPrediction/ShowPrediction";
 import LandingPage from "../components/UI/LandingPage";
 
 function HomePage() {
-  const { data: session, loading } = useSession();
+  const { data: session } = useSession();
   return (
     <div>
       <Head>
@@ -17,7 +17,9 @@ function HomePage() {
       </Head>
       {session ? (
         <div className="main-items-wrapper">
+          {/* @ts-ignore */}
           <Predictor userId={session.user._id} />
+          {/* @ts-ignore */}
           <ShowPrediction userId={session.user._id} />
         </div>
       ) : (
