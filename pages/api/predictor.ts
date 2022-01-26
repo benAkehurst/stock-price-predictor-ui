@@ -1,6 +1,27 @@
 import { connectDB, insertDocument } from "../../helpers/db-util";
 import { makeNewPrediction } from "../../helpers/api-util";
 
+export type StockPrediction = {
+  stockSymbol: String;
+  predictionData: StockPredictionData;
+  predictionMadeOnDate: String;
+  predictionTimeTaken: Number;
+  priceTrend: StockPriceTrend;
+  userId: String;
+  _id?: String;
+};
+
+export type StockPredictionData = {
+  open: Number;
+  high: Number;
+  low: Number;
+  close: Number;
+};
+export type StockPriceTrend = {
+  trend: String;
+  percentage: Number;
+};
+
 export default async function handler(req, res) {
   let client;
   try {
@@ -27,7 +48,7 @@ export default async function handler(req, res) {
     }
 
     try {
-      const stockPrediction = {
+      const stockPrediction: StockPrediction = {
         stockSymbol: newPrediction.stockSymbol,
         predictionData: newPrediction.predictionData,
         predictionMadeOnDate: newPrediction.predictionMadeOnDate,

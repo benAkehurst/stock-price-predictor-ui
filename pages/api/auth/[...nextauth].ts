@@ -11,16 +11,19 @@ export default NextAuth({
     }),
   ],
   jwt: {
+    //@ts-ignore
     encryption: true,
   },
   secret: process.env.SECRET,
   callbacks: {
+    //@ts-ignore
     async jwt(token, account) {
       if (account?.accessToken) {
         token.accessToken = account.accessToken;
       }
       return token;
     },
+    //@ts-ignore
     redirect: async (url, _baseUrl) => {
       if (url === "/user") {
         return Promise.resolve("/");
@@ -28,6 +31,7 @@ export default NextAuth({
       return Promise.resolve("/");
     },
     async session({ session, token, user }) {
+      //@ts-ignore
       session.user._id = user.id;
       return session;
     },
