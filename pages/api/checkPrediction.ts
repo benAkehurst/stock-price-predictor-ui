@@ -1,6 +1,6 @@
 import { parseISO, format } from "date-fns";
-import { connectDB, getSinglePrediction } from "../../helpers/db-util";
-import { getActualPricing } from "../../helpers/api-util";
+import { connectDB, getSinglePrediction } from "../../helpers/dbUtil";
+import { getActualPricing } from "../../helpers/apiUtil";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {

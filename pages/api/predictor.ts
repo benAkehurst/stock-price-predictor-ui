@@ -1,5 +1,5 @@
-import { connectDB, insertDocument } from "../../helpers/db-util";
-import { makeNewPrediction } from "../../helpers/api-util";
+import { connectDB, insertDocument } from "../../helpers/dbUtil";
+import { makeNewPrediction } from "../../helpers/apiUtil";
 
 export type StockPrediction = {
   stockSymbol: String;

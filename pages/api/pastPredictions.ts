@@ -1,4 +1,4 @@
-import { connectDB, getAllPredictions } from "../../helpers/db-util";
+import { connectDB, getAllPredictions } from "../../helpers/dbUtil";
 
 export default async function handler(req, res) {
   let client;
