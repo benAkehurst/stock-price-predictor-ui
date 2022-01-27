@@ -1,5 +1,4 @@
 import { createContext, useState, useEffect, useRef } from "react";
-import { NotificationProps } from "../components/UI/Notification";
 
 const NotificationContext = createContext({
   notification: null,
