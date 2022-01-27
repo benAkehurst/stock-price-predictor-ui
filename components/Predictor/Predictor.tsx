@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import classes from "./Predictor.module.css";
-import NotificationContext from "../../store/notification-context";
+import NotificationContext from "../../store/NotificationContext";
 import MakePrediction from "../PredictionItems/MakePrediction";
 import PredictionResult from "../PredictionItems/PredictionResult";
 import PredictingProcessing from "../UI/PredictingProcessing";

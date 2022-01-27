@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { parseISO, format } from "date-fns";
 import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import NotificationContext from "../../store/notification-context";
+import NotificationContext from "../../store/NotificationContext";
 import Modal from "../UI/Modal";
 import Button from "../UI/Button";
 import Comparison from "./Comparison";
