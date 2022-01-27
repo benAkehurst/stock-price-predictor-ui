@@ -2,11 +2,20 @@ import React, { useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import styled from "styled-components";
 
-const Modal = ({ show, onClose, children, title }) => {
+export type ModalProps = {
+  onClose: () => void;
+  children: React.ReactNode;
+  className?: string;
+  show: boolean;
+  title?: string;
+};
+
+const Modal = ({ show, onClose, children, title }: ModalProps) => {
   const [isBrowser, setIsBrowser] = useState(false);
   const modalWrapperRef = useRef();
 
   const backDropHandler = (e) => {
+    // @ts-ignore
     if (!modalWrapperRef?.current?.contains(e.target)) {
       onClose();
     }
@@ -32,7 +41,7 @@ const Modal = ({ show, onClose, children, title }) => {
               Close
             </StyledModalCloseButton>
           </StyledModalHeader>
-          {title && <StyledModalTitle>{title}</StyledModalTitle>}
+          {title && { title }}
           <StyledModalBody>{children}</StyledModalBody>
         </StyledModal>
       </StyledModalWrapper>

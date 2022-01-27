@@ -25,7 +25,7 @@ export async function getSinglePrediction(client, collection, predictionId) {
   const db = client.db();
   const documents = await db.collection(collection).find().toArray();
   const singlePrediction = documents.filter((prediction) => {
-    return ObjectId(prediction._id).toString() === predictionId;
+    return new ObjectId(prediction._id).toString() === predictionId;
   });
   return singlePrediction;
 }

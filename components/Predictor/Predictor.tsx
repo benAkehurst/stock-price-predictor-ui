@@ -1,20 +1,24 @@
 import { useContext, useState } from "react";
 import classes from "./Predictor.module.css";
-import NotificationContext from "../../store/notification-context";
+import NotificationContext from "../../store/NotificationContext";
 import MakePrediction from "../PredictionItems/MakePrediction";
 import PredictionResult from "../PredictionItems/PredictionResult";
 import PredictingProcessing from "../UI/PredictingProcessing";
 
-function Predictor({ userId }) {
+export type PredictorProps = {
+  userId: string;
+};
+
+function Predictor({ userId }: PredictorProps) {
   const notificationCtx = useContext(NotificationContext);
   const [predictionData, setPredictionData] = useState(null);
   const [processingPrediction, setProcessingPrediction] = useState(false);
 
-  function makePredictionHandler(stockSymbol) {
+  function makePredictionHandler(stockSymbol: string) {
     notificationCtx.showNotification({
       title: "Fetching...",
       message: "Making prediction...",
-      status: "pending...",
+      status: "pending",
     });
     setProcessingPrediction(true);
     fetch("/api/predictor", {
@@ -23,7 +27,7 @@ function Predictor({ userId }) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        stockSymbol: stockSymbol.enteredStock,
+        stockSymbol: stockSymbol,
         userId: userId,
       }),
     })
@@ -44,7 +48,7 @@ function Predictor({ userId }) {
             status: "error",
           });
           setProcessingPrediction(false);
-          setPrediction(null);
+          setPredictionData(null);
         } else {
           setPredictionData(data.predictionResult);
           setProcessingPrediction(false);

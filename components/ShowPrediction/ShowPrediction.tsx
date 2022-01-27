@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import classes from "./ShowPrediction.module.css";
 import PredictionResult from "../PredictionItems/PredictionResult";
+import { StockPrediction } from "../../pages/api/predictor";
+import { ShowPredictionProps } from "../ShowPredictions/ShowPredictions";
 
-function ShowPrediction({ userId }) {
-  const [predictionData, setPredictionData] = useState([]);
+function ShowPrediction({ userId }: ShowPredictionProps) {
+  const [predictionData, setPredictionData] = useState<StockPrediction[]>([]);
 
   useEffect(() => {
     fetch(`/api/pastPredictions`, {

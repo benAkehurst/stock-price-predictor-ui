@@ -1,9 +1,15 @@
 import { useContext } from "react";
 
 import classes from "./Notification.module.css";
-import NotificationContext from "../../store/notification-context";
+import NotificationContext from "../../store/NotificationContext";
 
-function Notification(props) {
+export type NotificationProps = {
+  title: string;
+  message: string;
+  status: string;
+};
+
+function Notification(props: NotificationProps) {
   const notificationCtx = useContext(NotificationContext);
 
   const { title, message, status } = props;

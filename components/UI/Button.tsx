@@ -2,7 +2,14 @@ import Link from "next/link";
 
 import classes from "./Button.module.css";
 
-function Button(props) {
+export type ButtonProps = {
+  link?: string;
+  onClick?: () => void;
+  children?: React.ReactNode;
+  className?: any;
+};
+
+function Button(props: ButtonProps) {
   if (props.link) {
     return (
       <Link href={props.link}>

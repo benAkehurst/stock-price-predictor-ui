@@ -1,7 +1,6 @@
 export async function dataCleaner(rawData) {
   // Extract only stock data
   const timeSeriesData = rawData["Time Series (Daily)"];
-
   // make array only stock price data
   const onlyTimeSeriesData = Object.keys(timeSeriesData).map((date) => {
     return {
