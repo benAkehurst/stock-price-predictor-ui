@@ -1,16 +1,32 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { parseISO, format } from "date-fns";
 import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import NotificationContext from "../../store/notification-context";
 import Modal from "../UI/Modal";
 import Button from "../UI/Button";
 import Comparison from "./Comparison";
-
 import classes from "./PredictionResult.module.css";
+import { StockPrediction } from "../../pages/api/predictor";
 
-function PredictionResult(props) {
+export type PredictionResultProps = {
+  actualPricing?: ActualPricing;
+  prediction: StockPrediction;
+};
+
+export type ActualPricing = {
+  date: string;
+  open: number;
+  high: number;
+  low: number;
+  close: number;
+};
+
+function PredictionResult(props: PredictionResultProps) {
+  const notificationCtx = useContext(NotificationContext);
   const [showModal, setShowModal] = useState(false);
-  const [actualOutcome, setActualOutcome] = useState(null);
+  const [actualOutcome, setActualOutcome] =
+    useState<PredictionResultProps>(null);
   const result = parseISO(props.prediction.predictionMadeOnDate);
   const date = format(result, "dd MMM YYY");
   const isToday = format(new Date(), "dd MMM YYY");
@@ -24,6 +40,11 @@ function PredictionResult(props) {
       stockSymbol: props.prediction.stockSymbol,
       date: props.prediction.predictionMadeOnDate,
     };
+    notificationCtx.showNotification({
+      title: "Checking...",
+      message: "Checking Prediction Accuracy...",
+      status: "pending",
+    });
     fetch("/api/checkPrediction", {
       method: "POST",
       body: JSON.stringify(reqBody),
@@ -32,6 +53,11 @@ function PredictionResult(props) {
       .then((data) => {
         setActualOutcome(data.singlePrediction);
         setShowModal(true);
+        notificationCtx.showNotification({
+          title: "Success!",
+          message: "Accuracy checked successfully!",
+          status: "success",
+        });
       });
   }
 
@@ -47,7 +73,7 @@ function PredictionResult(props) {
             <p>
               {currencySymbol}
               {currencySymbol === "£"
-                ? props.prediction.predictionData.open.toFixed(2) / 100
+                ? +props.prediction.predictionData.open.toFixed(2) / 100
                 : props.prediction.predictionData.open.toFixed(2)}
             </p>
           </div>
@@ -56,7 +82,7 @@ function PredictionResult(props) {
             <p>
               {currencySymbol}
               {currencySymbol === "£"
-                ? props.prediction.predictionData.close.toFixed(2) / 100
+                ? +props.prediction.predictionData.close.toFixed(2) / 100
                 : props.prediction.predictionData.close.toFixed(2)}
             </p>
           </div>
@@ -67,7 +93,7 @@ function PredictionResult(props) {
             <p>
               {currencySymbol}
               {currencySymbol === "£"
-                ? props.prediction.predictionData.high.toFixed(2) / 100
+                ? +props.prediction.predictionData.high.toFixed(2) / 100
                 : props.prediction.predictionData.high.toFixed(2)}
             </p>
           </div>
@@ -76,7 +102,7 @@ function PredictionResult(props) {
             <p>
               {currencySymbol}
               {currencySymbol === "£"
-                ? props.prediction.predictionData.low.toFixed(2) / 100
+                ? +props.prediction.predictionData.low.toFixed(2) / 100
                 : props.prediction.predictionData.low.toFixed(2)}
             </p>
           </div>

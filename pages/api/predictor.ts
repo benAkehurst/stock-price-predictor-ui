@@ -2,24 +2,24 @@ import { connectDB, insertDocument } from "../../helpers/dbUtil";
 import { makeNewPrediction } from "../../helpers/apiUtil";
 
 export type StockPrediction = {
-  stockSymbol: String;
+  stockSymbol: string;
   predictionData: StockPredictionData;
-  predictionMadeOnDate: String;
+  predictionMadeOnDate: string;
   predictionTimeTaken: Number;
   priceTrend: StockPriceTrend;
-  userId: String;
-  _id?: String;
+  userId: string;
+  _id?: string;
 };
 
 export type StockPredictionData = {
-  open: Number;
-  high: Number;
-  low: Number;
-  close: Number;
+  open: number;
+  high: number;
+  low: number;
+  close: number;
 };
 export type StockPriceTrend = {
-  trend: String;
-  percentage: Number;
+  trend: string;
+  percentage: number;
 };
 
 export default async function handler(req, res) {

@@ -2,9 +2,13 @@ import { useRef, useState } from "react";
 import classes from "./MakePrediction.module.css";
 import Button from "../UI/Button";
 
-function MakePrediction(props) {
+export type MakePredictionProps = {
+  onMakePrediction: (enteredStock: string) => void;
+};
+
+function MakePrediction(props: MakePredictionProps) {
   const [isInvalid, setIsInvalid] = useState(false);
-  const stockInputRef = useRef();
+  const stockInputRef = useRef(null);
 
   function makePredictionHandler(event) {
     event.preventDefault();
@@ -14,7 +18,7 @@ function MakePrediction(props) {
       setIsInvalid(true);
       return;
     }
-    props.onMakePrediction({ enteredStock: enteredStock });
+    props.onMakePrediction(enteredStock);
   }
 
   return (

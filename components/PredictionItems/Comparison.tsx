@@ -3,54 +3,17 @@ import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classes from "./Comparison.module.css";
 
-export default function Comparison(props) {
-  const { outcomeData } = props;
+export default function Comparison({ outcomeData }) {
   const result = parseISO(outcomeData.prediction.predictionMadeOnDate);
   const date = format(result, "dd MMM YYY");
   const currencySymbol = outcomeData.prediction.stockSymbol.includes(".l")
     ? "£"
     : "$";
 
-  function calculateOpen() {
-    if (
-      outcomeData.prediction.predictionData.open.toFixed(2) >
-      outcomeData.actualPricing.open.toFixed(2)
-    ) {
+  function calculateIfHighLow(predictionPrice: number, actualPrice: number) {
+    if (predictionPrice > actualPrice) {
       return false;
-    } else {
-      return true;
-    }
-  }
-
-  function calculateClose() {
-    if (
-      outcomeData.prediction.predictionData.close.toFixed(2) >
-      outcomeData.actualPricing.close.toFixed(2)
-    ) {
-      return false;
-    } else {
-      return true;
-    }
-  }
-
-  function calculateHigh() {
-    if (
-      outcomeData.prediction.predictionData.high.toFixed(2) >
-      outcomeData.actualPricing.high.toFixed(2)
-    ) {
-      return false;
-    } else {
-      return true;
-    }
-  }
-
-  function calculateLow() {
-    if (
-      outcomeData.prediction.predictionData.low.toFixed(2) >
-      outcomeData.actualPricing.low.toFixed(2)
-    ) {
-      return false;
-    } else {
+    } else if (predictionPrice < actualPrice) {
       return true;
     }
   }
@@ -67,15 +30,27 @@ export default function Comparison(props) {
             <p>
               Predicted: {currencySymbol}
               {currencySymbol === "£"
-                ? outcomeData.prediction.predictionData.open.toFixed(2) / 100
+                ? +outcomeData.prediction.predictionData.open.toFixed(2) / 100
                 : outcomeData.prediction.predictionData.open.toFixed(2)}
             </p>
-            <p className={calculateOpen() ? classes.green : classes.red}>
+            <p
+              className={
+                calculateIfHighLow(
+                  outcomeData.prediction.predictionData.open,
+                  outcomeData.actualPricing.open
+                )
+                  ? classes.green
+                  : classes.red
+              }
+            >
               Actual: {currencySymbol}
               {currencySymbol === "£"
-                ? outcomeData.actualPricing.open.toFixed(2) / 100
+                ? +outcomeData.actualPricing.open.toFixed(2) / 100
                 : outcomeData.actualPricing.open.toFixed(2)}
-              {calculateOpen() ? (
+              {calculateIfHighLow(
+                outcomeData.prediction.predictionData.open,
+                outcomeData.actualPricing.open
+              ) ? (
                 <FontAwesomeIcon icon={faArrowUp} />
               ) : (
                 <FontAwesomeIcon icon={faArrowDown} />
@@ -87,15 +62,27 @@ export default function Comparison(props) {
             <p>
               Predicted: {currencySymbol}
               {currencySymbol === "£"
-                ? outcomeData.prediction.predictionData.close.toFixed(2) / 100
+                ? +outcomeData.prediction.predictionData.close.toFixed(2) / 100
                 : outcomeData.prediction.predictionData.close.toFixed(2)}
             </p>
-            <p className={calculateClose() ? classes.green : classes.red}>
+            <p
+              className={
+                calculateIfHighLow(
+                  outcomeData.prediction.predictionData.close,
+                  outcomeData.actualPricing.close
+                )
+                  ? classes.green
+                  : classes.red
+              }
+            >
               Actual: {currencySymbol}
               {currencySymbol === "£"
-                ? outcomeData.actualPricing.close.toFixed(2) / 100
+                ? +outcomeData.actualPricing.close.toFixed(2) / 100
                 : outcomeData.actualPricing.close.toFixed(2)}
-              {calculateClose() ? (
+              {calculateIfHighLow(
+                outcomeData.prediction.predictionData.close,
+                outcomeData.actualPricing.close
+              ) ? (
                 <FontAwesomeIcon icon={faArrowUp} />
               ) : (
                 <FontAwesomeIcon icon={faArrowDown} />
@@ -109,15 +96,27 @@ export default function Comparison(props) {
             <p>
               Predicted: {currencySymbol}
               {currencySymbol === "£"
-                ? outcomeData.prediction.predictionData.high.toFixed(2) / 100
+                ? +outcomeData.prediction.predictionData.high.toFixed(2) / 100
                 : outcomeData.prediction.predictionData.high.toFixed(2)}
             </p>
-            <p className={calculateHigh() ? classes.green : classes.red}>
+            <p
+              className={
+                calculateIfHighLow(
+                  outcomeData.prediction.predictionData.high,
+                  outcomeData.actualPricing.high
+                )
+                  ? classes.green
+                  : classes.red
+              }
+            >
               Actual: {currencySymbol}
               {currencySymbol === "£"
-                ? outcomeData.actualPricing.high.toFixed(2) / 100
+                ? +outcomeData.actualPricing.high.toFixed(2) / 100
                 : outcomeData.actualPricing.high.toFixed(2)}
-              {calculateHigh() ? (
+              {calculateIfHighLow(
+                outcomeData.prediction.predictionData.high,
+                outcomeData.actualPricing.high
+              ) ? (
                 <FontAwesomeIcon icon={faArrowUp} />
               ) : (
                 <FontAwesomeIcon icon={faArrowDown} />
@@ -129,15 +128,27 @@ export default function Comparison(props) {
             <p>
               Predicted: {currencySymbol}
               {currencySymbol === "£"
-                ? outcomeData.prediction.predictionData.low.toFixed(2) / 100
+                ? +outcomeData.prediction.predictionData.low.toFixed(2) / 100
                 : outcomeData.prediction.predictionData.low.toFixed(2)}
             </p>
-            <p className={calculateLow() ? classes.green : classes.red}>
+            <p
+              className={
+                calculateIfHighLow(
+                  outcomeData.prediction.predictionData.low,
+                  outcomeData.actualPricing.low
+                )
+                  ? classes.green
+                  : classes.red
+              }
+            >
               Actual: {currencySymbol}
               {currencySymbol === "£"
-                ? outcomeData.actualPricing.low.toFixed(2) / 100
+                ? +outcomeData.actualPricing.low.toFixed(2) / 100
                 : outcomeData.actualPricing.low.toFixed(2)}
-              {calculateLow() ? (
+              {calculateIfHighLow(
+                outcomeData.prediction.predictionData.low,
+                outcomeData.actualPricing.low
+              ) ? (
                 <FontAwesomeIcon icon={faArrowUp} />
               ) : (
                 <FontAwesomeIcon icon={faArrowDown} />

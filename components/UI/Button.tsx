@@ -3,9 +3,10 @@ import Link from "next/link";
 import classes from "./Button.module.css";
 
 export type ButtonProps = {
-  link: string | null;
-  onClick: () => void;
-  children: React.ReactNode;
+  link?: string;
+  onClick?: () => void;
+  children?: React.ReactNode;
+  className?: any;
 };
 
 function Button(props: ButtonProps) {
