@@ -1,6 +1,10 @@
 import { useContext } from "react";
-
-import classes from "./Notification.module.css";
+import { Notification } from "@mantine/core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCheckCircle,
+  faTimesCircle,
+} from "@fortawesome/free-solid-svg-icons";
 import NotificationContext from "../../store/NotificationContext";
 
 export type NotificationProps = {
@@ -9,33 +13,48 @@ export type NotificationProps = {
   status: string;
 };
 
-function Notification(props: NotificationProps) {
+function NotificationElement(props: NotificationProps) {
   const notificationCtx = useContext(NotificationContext);
 
   const { title, message, status } = props;
 
-  let statusClasses = "";
-
-  if (status === "success") {
-    statusClasses = classes.success;
+  switch (status) {
+    case "success":
+      return (
+        <Notification
+          icon={<FontAwesomeIcon icon={faCheckCircle} />}
+          color="teal"
+          title={title}
+          onClose={notificationCtx.hideNotification}
+        >
+          {message}
+        </Notification>
+      );
+    case "error":
+      return (
+        <Notification
+          icon={<FontAwesomeIcon icon={faTimesCircle} />}
+          color="red"
+          title={title}
+          onClose={notificationCtx.hideNotification}
+        >
+          {message}
+        </Notification>
+      );
+    case "pending":
+      return (
+        <Notification
+          loading
+          title={title}
+          disallowClose
+          onClose={notificationCtx.hideNotification}
+        >
+          {message}
+        </Notification>
+      );
+    default:
+      break;
   }
-
-  if (status === "error") {
-    statusClasses = classes.error;
-  }
-
-  if (status === "pending") {
-    statusClasses = classes.pending;
-  }
-
-  const activeClasses = `${classes.notification} ${statusClasses}`;
-
-  return (
-    <div className={activeClasses} onClick={notificationCtx.hideNotification}>
-      <h2>{title}</h2>
-      <p>{message}</p>
-    </div>
-  );
 }
 
-export default Notification;
+export default NotificationElement;
