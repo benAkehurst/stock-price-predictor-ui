@@ -14,7 +14,6 @@ function Layout(props: LayoutProps) {
   return (
     <Fragment>
       <MainHeader />
-      <main>{props.children}</main>
       {activeNotification && (
         <Notification
           title={activeNotification.title}
@@ -22,6 +21,7 @@ function Layout(props: LayoutProps) {
           status={activeNotification.status}
         />
       )}
+      <main>{props.children}</main>
     </Fragment>
   );
 }
