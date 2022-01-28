@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import styled from "styled-components";
+import { Button } from "@mantine/core";
 
 export type ModalProps = {
   onClose: () => void;
@@ -37,9 +38,7 @@ const Modal = ({ show, onClose, children, title }: ModalProps) => {
       <StyledModalWrapper ref={modalWrapperRef}>
         <StyledModal>
           <StyledModalHeader>
-            <StyledModalCloseButton onClick={handleCloseClick}>
-              Close
-            </StyledModalCloseButton>
+            <Button onClick={handleCloseClick}>Close</Button>
           </StyledModalHeader>
           {title && { title }}
           <StyledModalBody>{children}</StyledModalBody>
@@ -90,16 +89,6 @@ const StyledModalOverlay = styled.div`
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.5);
-`;
-
-const StyledModalCloseButton = styled.button`
-  margin-bottom: 1rem;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-  border: 1px solid #ccc;
-  background-color: #38bdf8;
-  color: white;
-  cursor: pointer;
 `;
 
 export default Modal;

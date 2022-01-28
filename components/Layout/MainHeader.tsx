@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 import classes from "./MainHeader.module.css";
 import GoogleLoginButton from "../UI/GoogleLoginButton";
-import Button from "../UI/Button";
+import { Button } from "@mantine/core";
 
 function MainHeader() {
   const { data: session } = useSession();

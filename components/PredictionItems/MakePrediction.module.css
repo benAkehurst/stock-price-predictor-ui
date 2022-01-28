@@ -51,11 +51,8 @@
 }
 
 .form button {
-  text-decoration: none;
-  cursor: pointer;
   font: inherit;
-  background-color: #0309be;
-  border: 1px solid #191fe1;
+  background-color: #228be6;
   color: white;
   border-radius: 0.25rem;
   font-size: 1.25rem;

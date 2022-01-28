@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
+import { Button } from "@mantine/core";
 import classes from "./MakePrediction.module.css";
-import Button from "../UI/Button";
 
 export type MakePredictionProps = {
   onMakePrediction: (enteredStock: string) => void;

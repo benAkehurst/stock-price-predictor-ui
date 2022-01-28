@@ -2,9 +2,9 @@ import { useState, useContext } from "react";
 import { parseISO, format } from "date-fns";
 import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Button } from "@mantine/core";
 import NotificationContext from "../../store/NotificationContext";
 import Modal from "../UI/Modal";
-import Button from "../UI/Button";
 import Comparison from "./Comparison";
 import classes from "./PredictionResult.module.css";
 import { StockPrediction } from "../../pages/api/predictor";
@@ -134,7 +134,7 @@ function PredictionResult(props: PredictionResultProps) {
         </div>
       </div>
       {isToday === date ? null : (
-        <Button className={classes.button} onClick={checkAccuracyHandler}>
+        <Button onClick={checkAccuracyHandler}>
           Check Prediction Accuracy
         </Button>
       )}
