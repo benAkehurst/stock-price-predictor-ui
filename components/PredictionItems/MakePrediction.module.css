@@ -49,20 +49,3 @@
   font-size: 1.5rem;
   width: 100%;
 }
-
-.form button {
-  text-decoration: none;
-  cursor: pointer;
-  font: inherit;
-  background-color: #0309be;
-  border: 1px solid #191fe1;
-  color: white;
-  border-radius: 0.25rem;
-  font-size: 1.25rem;
-  width: 100%;
-  padding: 0.5rem 1.5rem;
-  border: 1px solid #ccc;
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
-  margin: 0 1rem;
-  width: 90%;
-}

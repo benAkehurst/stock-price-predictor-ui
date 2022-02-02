@@ -1,7 +1,7 @@
 import { Fragment, useContext } from "react";
-
+import classes from "./Layout.module.css";
 import MainHeader from "./MainHeader";
-import Notification from "../UI/Notification";
+import NotificationElement from "../UI/NotificationElement";
 import NotificationContext from "../../store/NotificationContext";
 
 export type LayoutProps = {
@@ -14,14 +14,16 @@ function Layout(props: LayoutProps) {
   return (
     <Fragment>
       <MainHeader />
-      <main>{props.children}</main>
       {activeNotification && (
-        <Notification
-          title={activeNotification.title}
-          message={activeNotification.message}
-          status={activeNotification.status}
-        />
+        <div className={classes.notificationWrapper}>
+          <NotificationElement
+            title={activeNotification.title}
+            message={activeNotification.message}
+            status={activeNotification.status}
+          />
+        </div>
       )}
+      <main>{props.children}</main>
     </Fragment>
   );
 }

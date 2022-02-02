@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getSession } from "next-auth/react";
 import styled from "styled-components";
+import { SimpleGrid } from "@mantine/core";
 import PredictionResult from "../components/PredictionItems/PredictionResult";
 import { Fragment } from "react/cjs/react.production.min";
 
@@ -24,7 +25,15 @@ function Predictions(props) {
     <Fragment>
       <StyledContainer>
         <h2>Predictions page</h2>
-        <StyledSinglePredictionContainer>
+        <SimpleGrid
+          cols={4}
+          spacing="lg"
+          breakpoints={[
+            { maxWidth: 980, cols: 3, spacing: "md" },
+            { maxWidth: 755, cols: 2, spacing: "sm" },
+            { maxWidth: 600, cols: 1, spacing: "sm" },
+          ]}
+        >
           {predictionData.map((prediction) => {
             return (
               <StyledSinglePrediction key={prediction._id}>
@@ -32,7 +41,7 @@ function Predictions(props) {
               </StyledSinglePrediction>
             );
           })}
-        </StyledSinglePredictionContainer>
+        </SimpleGrid>
       </StyledContainer>
     </Fragment>
   );
