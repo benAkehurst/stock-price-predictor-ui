@@ -11,7 +11,9 @@ function SecondsCounter() {
     return () => clearInterval(interval);
   }, [seconds]);
 
-  return <Fragment>{seconds} passed since starting prediction.</Fragment>;
+  return (
+    <Fragment>{seconds} seconds passed since starting prediction.</Fragment>
+  );
 }
 
 export default SecondsCounter;
