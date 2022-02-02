@@ -1,4 +1,4 @@
-import { useEffect, useState, Fragment } from "react";
+import { useEffect, useState, Fragment } from 'react';
 
 function SecondsCounter() {
   const [seconds, setSeconds] = useState(0);
@@ -11,7 +11,7 @@ function SecondsCounter() {
     return () => clearInterval(interval);
   }, [seconds]);
 
-  return <Fragment>{seconds} passed predicting</Fragment>;
+  return <Fragment>{seconds} passed since starting prediction.</Fragment>;
 }
 
 export default SecondsCounter;
