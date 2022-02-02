@@ -5,11 +5,12 @@
 
 .ldsGrid {
   background-color: lightgrey;
-  display: inline-block;
-  position: relative;
+  display: flex;
+  align-items: center;
+  justify-self: center;
   width: 80px;
   height: 80px;
-  margin-top: 1rem;
+  margin-top: 1.25rem;
 }
 .ldsGrid div {
   position: absolute;
