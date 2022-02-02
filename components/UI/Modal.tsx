@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
-import ReactDOM from "react-dom";
-import styled from "styled-components";
-import { Button } from "@mantine/core";
+import React, { useEffect, useRef, useState } from 'react';
+import ReactDOM from 'react-dom';
+import styled from 'styled-components';
+import { Button } from '@mantine/core';
 
 export type ModalProps = {
   onClose: () => void;
@@ -24,8 +24,9 @@ const Modal = ({ show, onClose, children, title }: ModalProps) => {
 
   useEffect(() => {
     setIsBrowser(true);
-    window.addEventListener("click", backDropHandler);
-    return () => window.removeEventListener("click", backDropHandler);
+    window.addEventListener('click', backDropHandler);
+    return () => window.removeEventListener('click', backDropHandler);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleCloseClick = (e) => {
@@ -50,7 +51,7 @@ const Modal = ({ show, onClose, children, title }: ModalProps) => {
   if (isBrowser) {
     return ReactDOM.createPortal(
       modalContent,
-      document.getElementById("modal-root")
+      document.getElementById('modal-root')
     );
   } else {
     return null;

@@ -1,17 +1,17 @@
-import { useEffect, useState } from "react";
-import classes from "./ShowPrediction.module.css";
-import PredictionResult from "../PredictionItems/PredictionResult";
-import { StockPrediction } from "../../pages/api/predictor";
-import { ShowPredictionProps } from "../ShowPredictions/ShowPredictions";
+import { useEffect, useState } from 'react';
+import classes from './ShowPrediction.module.css';
+import PredictionResult from '../PredictionItems/PredictionResult';
+import { StockPrediction } from '../../pages/api/predictor';
+import { ShowPredictionProps } from '../ShowPredictions/ShowPredictions';
 
 function ShowPrediction({ userId }: ShowPredictionProps) {
   const [predictionData, setPredictionData] = useState<StockPrediction[]>([]);
 
   useEffect(() => {
     fetch(`/api/pastPredictions`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({ userId: userId }),
     })
@@ -19,7 +19,7 @@ function ShowPrediction({ userId }: ShowPredictionProps) {
       .then((data) => {
         setPredictionData(data.pastPredictions);
       });
-  }, []);
+  }, [userId]);
 
   return (
     <div className={classes.predictionsWrapper}>
