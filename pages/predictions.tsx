@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import { getSession } from "next-auth/react";
 import styled from "styled-components";
 import { SimpleGrid } from "@mantine/core";
 import PredictionResult from "../components/PredictionItems/PredictionResult";
-import { Fragment } from "react/cjs/react.production.min";
+import NotificationContext from "../store/NotificationContext";
 
 function Predictions(props) {
   const [predictionData, setPredictionData] = useState([]);
+  const notificationCtx = useContext(NotificationContext);
+
   useEffect(() => {
     fetch(`/api/pastPredictions`, {
       method: "POST",
@@ -20,6 +22,38 @@ function Predictions(props) {
         setPredictionData(data.pastPredictions);
       });
   }, []);
+
+  const deletePredictionHandler = async (predictionId: string) => {
+    notificationCtx.showNotification({
+      title: "Deleting...",
+      message: "Deleting Prediction...",
+      status: "pending",
+    });
+    fetch(`/api/pastPredictions/${predictionId}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        notificationCtx.showNotification({
+          title: "Success!",
+          message: "Prediction Deleted!",
+          status: "success",
+        });
+      })
+      .then(() => {
+        fetch(`/api/pastPredictions`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ userId: props.user._id }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            setPredictionData(data.pastPredictions);
+          });
+      });
+  };
 
   return (
     <Fragment>
@@ -37,7 +71,10 @@ function Predictions(props) {
           {predictionData.map((prediction) => {
             return (
               <StyledSinglePrediction key={prediction._id}>
-                <PredictionResult prediction={prediction} />
+                <PredictionResult
+                  prediction={prediction}
+                  onDeletePredictionHandler={deletePredictionHandler}
+                />
               </StyledSinglePrediction>
             );
           })}
