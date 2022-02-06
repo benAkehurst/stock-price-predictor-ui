@@ -32,6 +32,10 @@ export async function getSinglePrediction(client, collection, predictionId) {
 
 export async function deleteSinglePrediction(client, collection, predictionId) {
   const db = client.db();
+  const selectedPrediction = await db.collection(collection).findOne({
+    _id: new ObjectId(predictionId),
+  });
+  await db.collection("deletedPredictions").insertOne(selectedPrediction);
   const deletedPrediction = await db
     .collection(collection)
     .deleteOne({ _id: new ObjectId(predictionId) });
