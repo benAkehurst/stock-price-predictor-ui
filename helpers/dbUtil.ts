@@ -29,3 +29,11 @@ export async function getSinglePrediction(client, collection, predictionId) {
   });
   return singlePrediction;
 }
+
+export async function deleteSinglePrediction(client, collection, predictionId) {
+  const db = client.db();
+  const deletedPrediction = await db
+    .collection(collection)
+    .deleteOne({ _id: new ObjectId(predictionId) });
+  return deletedPrediction;
+}

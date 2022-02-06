@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { parseISO, format } from "date-fns";
 import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Button } from "@mantine/core";
+import { Button, Grid } from "@mantine/core";
 import NotificationContext from "../../store/NotificationContext";
 import Modal from "../UI/Modal";
 import Comparison from "./Comparison";
@@ -10,8 +10,9 @@ import classes from "./PredictionResult.module.css";
 import { StockPrediction } from "../../pages/api/predictor";
 
 export type PredictionResultProps = {
-  actualPricing?: ActualPricing;
   prediction: StockPrediction;
+  actualPricing?: ActualPricing;
+  onDeletePrediction?: (predictionId: string) => void;
 };
 
 export type ActualPricing = {
@@ -34,7 +35,7 @@ function PredictionResult(props: PredictionResultProps) {
     ? "£"
     : "$";
 
-  function checkAccuracyHandler() {
+  const checkAccuracyHandler = async () => {
     const reqBody = {
       predictionId: props.prediction._id,
       stockSymbol: props.prediction.stockSymbol,
@@ -59,7 +60,7 @@ function PredictionResult(props: PredictionResultProps) {
           status: "success",
         });
       });
-  }
+  };
 
   return (
     <div className={classes.predictionResultWrapper}>
@@ -133,11 +134,26 @@ function PredictionResult(props: PredictionResultProps) {
           <p>{props.prediction.predictionTimeTaken.toFixed(2)} seconds</p>
         </div>
       </div>
-      {isToday === date ? null : (
-        <Button onClick={checkAccuracyHandler}>
-          Check Prediction Accuracy
-        </Button>
-      )}
+      <Grid grow>
+        <Grid.Col span={4}>
+          {isToday === date ? null : (
+            <Button onClick={checkAccuracyHandler}>
+              Check Prediction Accuracy
+            </Button>
+          )}
+        </Grid.Col>
+        <Grid.Col span={4}>
+          <Button
+            color="red"
+            onClick={() => {
+              console.log("clicked");
+              props.onDeletePrediction(props.prediction._id);
+            }}
+          >
+            Delete Prediction
+          </Button>
+        </Grid.Col>
+      </Grid>
       {showModal ? (
         <Modal onClose={() => setShowModal(false)} show={showModal}>
           <Comparison outcomeData={actualOutcome} />
