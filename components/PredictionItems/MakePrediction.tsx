@@ -1,42 +1,37 @@
-import { useRef, useState } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { Button } from "@mantine/core";
 import classes from "./MakePrediction.module.css";
-import Button from "../UI/Button";
 
 export type MakePredictionProps = {
   onMakePrediction: (enteredStock: string) => void;
 };
 
+type Inputs = {
+  stockSymbol: string;
+};
+
 function MakePrediction(props: MakePredictionProps) {
-  const [isInvalid, setIsInvalid] = useState(false);
-  const stockInputRef = useRef(null);
-
-  function makePredictionHandler(event) {
-    event.preventDefault();
-    const enteredStock = stockInputRef.current.value;
-
-    if (!enteredStock || enteredStock.trim() === "") {
-      setIsInvalid(true);
-      return;
-    }
-    props.onMakePrediction(enteredStock);
-  }
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>();
+  const onSubmit: SubmitHandler<Inputs> = (data) =>
+    props.onMakePrediction(data.stockSymbol);
 
   return (
     <div className={classes.makePrediction}>
       <div className={classes.banner}>Make a prediction</div>
-      <form className={classes.form} onSubmit={makePredictionHandler}>
+      <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
         <div className={classes.control}>
-          <label htmlFor="prediction">Enter Stock Symbol</label>
+          <label>Stock Symbol</label>
           <input
-            type="text"
-            name="prediction"
-            id="prediction"
             placeholder="eg AAPL"
-            ref={stockInputRef}
+            {...register("stockSymbol", { required: true })}
           />
+          {errors.stockSymbol && <span>Stock Symbol is required!</span>}
+          <Button type="submit">Predict</Button>
         </div>
-        {isInvalid && <p>Please enter a valid stock symbol!</p>}
-        <Button>Predict</Button>
       </form>
     </div>
   );
