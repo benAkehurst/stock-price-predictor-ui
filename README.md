@@ -1,34 +1,24 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Stock Price Predictor
 
-## Getting Started
+Stock price predictor is an update of [this project](https://github.com/benAkehurst/stock-price-predictor), where I used the BrainJS library to predict stock prices.
 
-First, run the development server:
+In Stock Price Predictor V2, I've updated that past project massively, using techniques and skills I've learned since V1.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+I've split the project into 2 bits, [an engine](https://github.com/benAkehurst/stock-price-predictor-engine), that runs the predictions, and an agnostic UI that talks to the prediction engine api.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+I did this because I wanted a separation of concerns with a backend and frontend, and I also wanted to harness the power of NextJS, where you can write backend and frontend code all in one project.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+This app was a great opportunity to learn, and in this project I've learned NextAuth and logging in with a google account, GCP and it's App engine framework and cli for hosting Nodejs projects.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## Project prerequisites
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- MongoDB atlas account and collection running in the cloud
+- An AlphaVantage API key - [get one here](https://www.alphavantage.co/support/#api-key)
+- A Google Account with a [valid client ID](https://developers.google.com/identity/gsi/web/guides/get-google-api-clientid) setup in the Google Developer Portal
 
-## Learn More
+## Running the project
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. First, visit the [engine repo](https://github.com/benAkehurst/stock-price-predictor-engine), download and run locally for a working instance of the predictor.
+2. Download and clone this project and run `npm i`
+3. Update the .env.local.example file, and fill in the missing parameters and save the new file as .env.local
+4. Run the project with `npm run dev`
